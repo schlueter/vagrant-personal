@@ -22,37 +22,35 @@ After installing, the plugin can be configured in your Vagrantfile:
 
 ```ruby
 Vagrant.configure(2) do |config|
-  guest_ipaddress = 192.168.33.29
-  cwd = Pathname __dir__
   if Vagrant.has_plugin?('vagrant-personal-synced-folders')
-    config.personal.synced_folders = [{name: 'Bugs',
-                                       guest_path: '/srv/bugs',
-                                       validate: 'git+empty'},
-                                      {name: 'Daffy',
-                                       guest_path: '/srv/daffy',
-                                       validate: 'git+empty'},
-                                      {name: 'Tweety',
-                                       guest_path: '/srv/tweety',
-                                       validate: 'git+empty'}]
+    config.personal.synced_folders = [{ name:       'Bugs',
+                                        validate:   'git+empty'},
+
+                                      { name:       'Daffy',
+                                        validate:   'git+empty'},
+
+                                      { name:       'Tweety',
+                                        guest_path: '/srv/tweety',
+                                        validate:   'git+empty'}]
+
     config.personal.save_file = cwd.join 'looney-config.yml'
   else
+    cwd = Pathname __dir__
     # This is only necessary if you want to support systems without the plugin
     # The plugin provides a customized version of this hash.
     personal = {host_ip_address: IPAddr.new(guest_ipaddress).mask('255.255.255.0).succ,
                 synced_folders: [{ name: 'Bugs',
                                    host_path: cwd.join 'Bugs',
-                                   guest_path: '/srv/bugs',
                                    git_branch: 'master'}
 
                                  { name: 'Daffy',
                                    host_path: cwd.join 'Daffy',
-                                   guest_path: '/srv/daffy',
                                    git_branch: 'master'}
 
                                  { name: 'Tweety',
                                    host_path: cwd.join 'Tweety',
                                    guest_path: '/srv/tweety',
-                                   git_branch: 'master'}]
+                                   guest_path: '/srv/tweety'}]
   end
   …
 end
