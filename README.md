@@ -1,6 +1,6 @@
 # Vagrant Personal Synced Folders Plugin
 
-This is a [Vagrant](http://www.vagrantup.com) plugin to facilitate personally configurable synced folder locations per installation. It looks a candidate and asks the user to confirm the candidate or enter their own, and will validate the chosen folder before providing information about it as variables with can be used in synced folder declarations or passed to provisioning scripts.
+This is a [Vagrant](http://www.vagrantup.com) plugin to facilitate personally configurable synced folder locations per installation. It searches upwards for a candidate and asks the user to confirm the candidate or enter their own, and will validate the chosen folder before providing information about it as variables with can be used in synced folder declarations or passed to provisioning scripts.
 
 ## Requirements
 
